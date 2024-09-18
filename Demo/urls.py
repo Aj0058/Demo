@@ -21,5 +21,5 @@ from Myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Contacts/', views.Contactus, name='Contact'),
-
+      path('Feeds/', views.feedback_view, name='feedback_view'), 
 ]

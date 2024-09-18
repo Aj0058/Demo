@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from Myapp.models import Contact
+from Myapp.models import Contact,Feedback
 from django.http import HttpResponse
 
 
@@ -23,3 +23,19 @@ def Contactus(request):
 
     # For non-POST requests, render the contact form
     return render(request, 'Contact.html')
+
+
+def feedback_view(request):  # Rename the view function to avoid conflict
+     if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        product = request.POST.get('product')
+        message = request.POST.get('message')
+        
+        # Create a new feedback instance and save it to the database
+        feedback = Feedback(Name2=name, Email2=email, Phone2=phone, Product2=product, Message2=message)
+        feedback.save()
+
+        return redirect('feedback_view')  # Update redirect to the new view name    
+     return render(request, 'Feed.html')
